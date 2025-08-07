@@ -217,6 +217,7 @@ void restart_menu_animate(void) {
     if (restart_menu_up) {
       WY_REG = restart_menu_up_y[restart_menu_anim_timer];
       if (restart_menu_anim_timer == 20) {
+        disable_interrupts();
         vmemcpy((u8 *)0x9da0, (u8 *)0x9c00, 0x20 * 18);
         set_win_tiles(0, 0, RESTART_MENU_WIDTH, RESTART_MENU_HEIGHT,
                       restart_menu_map);
@@ -229,10 +230,12 @@ void restart_menu_animate(void) {
         }
 #endif
         vmemset((u8 *)0x9c60, 0, 0x20 * 8);
+        enable_interrupts();
       }
     } else {
       WY_REG = restart_menu_down_y[restart_menu_anim_timer];
       if (restart_menu_anim_timer == 13) {
+        disable_interrupts();
         vmemcpy((u8 *)0x9c00, (u8 *)0x9da0, 0x20 * 18);
 #ifdef CGB_SUPPORT
         if (_cpu == CGB_TYPE) {
@@ -241,6 +244,7 @@ void restart_menu_animate(void) {
           VBK_REG = 0;
         }
 #endif
+        enable_interrupts();
       }
     }
   }
