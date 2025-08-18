@@ -682,14 +682,16 @@ redo:
     update_tile(pos, TILE_SAW_BROKEN);
     nop_saw_anim(pos);
   } else if (tile == TILE_TELEPORTER && !teleported) {
+    u8 can_teleport = 0;
     u8 newpos = 0;
     do {
       if (tmap[newpos] == TILE_TELEPORTER && !IS_MOB(newpos)) {
+        can_teleport = 1;
         break;
       }
     } while(++newpos);
 
-    if (pos != newpos) {
+    if (can_teleport && pos != newpos) {
       // Move mob position in mobmap
       mobmap[pos] = 0;
       mobmap[newpos] = mob + 1;
