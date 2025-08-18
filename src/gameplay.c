@@ -884,6 +884,7 @@ void hitmob(u8 index, u8 dmg) {
       dirty_tile(pos);
 
       if (index == PLAYER_MOB) {
+        mob_hp[index] = 0;
         inv_update_hp();
         gameover_timer = GAMEOVER_FRAMES;
       } else {
