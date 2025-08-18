@@ -19,9 +19,9 @@ See the game's itch.io page here: https://binji.itch.io/porklikegb
 
 Porklike.gb uses the GBDK2020 toolkit, RGBGFX, as well as some Python3 scripts.
 
-I know you're not supposed to, but I hand-wrote a
-[ninja](https://ninja-build.org/) build file. It's completely configured for my
-system currently, so you will have to tweak it to build on yours.
+```sh
+$ make
+```
 
 ## License
 
