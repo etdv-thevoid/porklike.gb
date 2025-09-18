@@ -20,6 +20,14 @@ See the game's itch.io page here: https://binji.itch.io/porklikegb
 Porklike.gb uses the GBDK2020 toolkit, RGBGFX, as well as some Python3 scripts.
 
 ```sh
+$ git clone -b v4.4.0 https://github.com/gbdk-2020/gbdk-2020
+$ make -C gbdk-2020
+```
+```sh
+$ git clone -b v0.7.0 https://github.com/rednex/rgbds
+$ make -C rgbds
+```
+```sh
 $ make
 ```
 
