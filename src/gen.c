@@ -1083,7 +1083,7 @@ void chests(void) {
   }
 
   for (i = 0; i < num_cands; ++i) {
-    addmob(floor >= 4 && XRND_20_PERCENT() ? MOB_TYPE_HEART_CHEST
+    addmob(floor >= 2 && XRND_20_PERCENT() ? MOB_TYPE_HEART_CHEST
                                             : MOB_TYPE_CHEST,
            cands[i]);
   }
