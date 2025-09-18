@@ -69,9 +69,9 @@ $(OBJDIR)/%.o:	$(SRCDIR)/%.s
 	$(LCC) $(CFLAGS) -c -o $@ $<
 
 $(OBJDIR)/tile%.o: $(IMGDIR)/%.png
-	$(RGBGFX) -u $< -o $(basename $@).bin
-	$(GBCOMPRESS) $(basename $@).bin $(basename $@).binz
-	$(PYTHON) ref/bin2c.py $(basename $@).binz -o $(basename $@).c
+	$(RGBGFX) -u -d 2 $< -o $(basename $@).2bpp
+	$(GBCOMPRESS) $(basename $@).2bpp $(basename $@).bin
+	$(PYTHON) ref/bin2c.py $(basename $@).bin -o $(basename $@).c
 	$(LCC) $(CFLAGS) -c -o $@ $(basename $@).c
 
 # Link the compiled object files into a .gb ROM file
