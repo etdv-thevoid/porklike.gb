@@ -16,8 +16,8 @@ void inv_animate(void);
 void restart_menu_update(void);
 void restart_menu_animate(void);
 
-void inv_display_blind();
-void inv_display_floor();
+void inv_display_blind(void);
+void inv_display_floor(void);
 void inv_decrement_recover(void);
 void inv_update_hp(void);
 void inv_update_keys(void);
