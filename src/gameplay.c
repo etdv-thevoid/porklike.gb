@@ -318,7 +318,7 @@ void move_player(void) {
           if (IS_MOB(newpos)) {
             mobbump(PLAYER_MOB, dir);
             if (mob_type[mobmap[newpos] - 1] == MOB_TYPE_SCORPION &&
-                XRND_50_PERCENT()) {
+                XRND_12_5_PERCENT()) {
               blind();
             }
             hitmob(mobmap[newpos] - 1, 1);
@@ -819,7 +819,7 @@ void hitmob(u8 index, u8 dmg) {
         addmob(MOB_TYPE_SLIME, pos);
         mobhopnew(mob, dropspot(pos));
         sound = SFX_OOPS;
-      } else if (mtype == MOB_TYPE_HEART_CHEST && XRND_20_PERCENT()) {
+      } else if (mtype == MOB_TYPE_HEART_CHEST) {
         droppick(PICKUP_TYPE_HEART, pos);
       } else {
         droppick_rnd(pos);

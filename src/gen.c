@@ -1025,8 +1025,8 @@ void voids(void) {
 void chests(void) {
   u8 has_teleporter, room, chest_pos, i, pos, cand0, cand1;
 
-  // Teleporter in level if level >= 5 and rnd(5)<1 (20%)
-  has_teleporter = floor >= 5 && XRND_20_PERCENT();
+  // Teleporter in level if level >= 4 and rnd(5)<1 (20%)
+  has_teleporter = floor >= 4 && XRND_20_PERCENT();
 
   // For all rooms, find a chest position (not on a wall).
   num_cands = 0;
@@ -1083,7 +1083,7 @@ void chests(void) {
   }
 
   for (i = 0; i < num_cands; ++i) {
-    addmob(floor >= 5 && XRND_20_PERCENT() ? MOB_TYPE_HEART_CHEST
+    addmob(floor >= 4 && XRND_20_PERCENT() ? MOB_TYPE_HEART_CHEST
                                             : MOB_TYPE_CHEST,
            cands[i]);
   }
