@@ -182,9 +182,9 @@ void gameplay_update(void) NONBANKED {
     inv_display_floor();
     sprite_hide();
     IE_REG &= ~VBL_IFLAG;
-    SWITCH_ROM_MBC1(3);
+    SWITCH_ROM(3);
     mapgen();
-    SWITCH_ROM_MBC1(1);
+    SWITCH_ROM(1);
     clear_bkg(); // clear before enabling vblank
     joy_action = 0;
     IE_REG |= VBL_IFLAG;

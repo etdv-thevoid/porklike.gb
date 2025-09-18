@@ -36,9 +36,9 @@ void main(void) NONBANKED {
   soundinit();
   enable_interrupts();
 
-  SWITCH_ROM_MBC1(2);
+  SWITCH_ROM(2);
   titlescreen();
-  SWITCH_ROM_MBC1(1);
+  SWITCH_ROM(1);
 
   // Initialize for gameplay
   init_win(0);
