@@ -31,6 +31,8 @@
 #define TILE_VOID_EXIT_DIFF 0x35
 #define TILE_VOID_OPEN_DIFF 3
 
+#define SRAM_SAVE_DATA 0x10
+
 // Sprite tiles
 #define TILE_SHOT 0x1
 #define TILE_ROPE_TIP_V 0x2
@@ -1079,21 +1081,32 @@ u8 dropspot(u8 pos) {
 void sram_init(void) {
   ENABLE_RAM;
   // Check SRAM.
-  if (!(_SRAM[0] == 'p' && _SRAM[1] == 'o' && _SRAM[2] == 'r' &&
-        _SRAM[3] == 'k' && _SRAM[4] < MAX_WURSTCHAIN)) {
-    _SRAM[0] = 'p';
-    _SRAM[1] = 'o';
-    _SRAM[2] = 'r';
-    _SRAM[3] = 'k';
-    _SRAM[4] = 0;
+  if (!(_SRAM[SRAM_SAVE_DATA + 0] == 'p' &&
+        _SRAM[SRAM_SAVE_DATA + 1] == 'o' &&
+        _SRAM[SRAM_SAVE_DATA + 2] == 'r' &&
+        _SRAM[SRAM_SAVE_DATA + 3] == 'k' &&
+        _SRAM[SRAM_SAVE_DATA + 4] == 'l' &&
+        _SRAM[SRAM_SAVE_DATA + 5] == 'i' &&
+        _SRAM[SRAM_SAVE_DATA + 6] == 'k' &&
+        _SRAM[SRAM_SAVE_DATA + 7] == 'e' &&
+        _SRAM[SRAM_SAVE_DATA + 8] < MAX_WURSTCHAIN)) {
+    _SRAM[SRAM_SAVE_DATA + 0] = 'p';
+    _SRAM[SRAM_SAVE_DATA + 1] = 'o';
+    _SRAM[SRAM_SAVE_DATA + 2] = 'r';
+    _SRAM[SRAM_SAVE_DATA + 3] = 'k';
+    _SRAM[SRAM_SAVE_DATA + 4] = 'l';
+    _SRAM[SRAM_SAVE_DATA + 5] = 'i';
+    _SRAM[SRAM_SAVE_DATA + 6] = 'k';
+    _SRAM[SRAM_SAVE_DATA + 7] = 'e';
+    _SRAM[SRAM_SAVE_DATA + 8] = 0;
   } else {
-    wurstchain = _SRAM[4];
+    wurstchain = _SRAM[SRAM_SAVE_DATA + 8];
   }
   DISABLE_RAM;
 }
 
 void sram_update_wurstchain(u8 value) {
   ENABLE_RAM;
-  _SRAM[4] = value;
+  _SRAM[SRAM_SAVE_DATA + 8] = value;
   DISABLE_RAM;
 }
