@@ -127,7 +127,7 @@ const u8 mob_plan_floor[] = {
     44, // floor 7
     53, // floor 8
     62, // floor 9
-    70, // total
+    71, // total
 };
 
 const u8 mob_type_key[] = {
@@ -1200,7 +1200,23 @@ retry:
     tempmap[pos] = 0;
     --num_cands;
     --mobs;
-    addmob(mob_plan[mob_plan_floor[floor] + mobs], pos);
+    if (wurstchain) {
+      if ((mob_plan[mob_plan_floor[floor] + mobs]) & 1) {
+        // if odd (weak mob), rand int (0-5):
+        // 0,1; slime
+        // 2,3; scorpion
+        // 4,5; ghost
+        addmob((randint(MOB_TYPE_KONG)) | 1, pos);
+      } else {
+        // if even (strong mob), rand int (2-7):
+        // 2,3; queen
+        // 4,5; hulk
+        // 6,7; kong
+        addmob((randint(MOB_TYPE_KONG) + 2) & 254, pos);
+      }
+    } else {
+      addmob(mob_plan[mob_plan_floor[floor] + mobs], pos);
+    }
   } while (mobs && num_cands);
 
   if (mobs != 0 && !pack) {

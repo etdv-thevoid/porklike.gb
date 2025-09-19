@@ -801,7 +801,7 @@ void hitmob(u8 index, u8 dmg) {
       slime = 0;
       sound = SFX_BOOM;
     } else {
-      percent = 20;
+      percent = wurstchain ? 25 : 20;
       if (!(validmap[pos] & VALID_U) || IS_BREAKABLE_WALL_POS(POS_U(pos))) {
         tile = TILE_WALL_FACE_RUBBLE;
       } else {
@@ -816,7 +816,7 @@ void hitmob(u8 index, u8 dmg) {
     }
 
     if (randint(100) < percent) {
-      if (slime && XRND_20_PERCENT()) {
+      if (slime && (wurstchain ? XRND_33_PERCENT() : XRND_20_PERCENT())) {
         mob = num_mobs;
         addmob(MOB_TYPE_SLIME, pos);
         mobhopnew(mob, dropspot(pos));
