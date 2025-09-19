@@ -157,6 +157,8 @@ void gameplay_init(void) {
   counter_zero(&st_floor);
   counter_zero(&st_steps);
   counter_zero(&st_kills);
+
+  sram_get_wurstchain();
   joy_init();
 }
 
@@ -793,7 +795,7 @@ void hitmob(u8 index, u8 dmg) {
         msg_wurstchain(wurstchain, MSG_WURSTCHAIN_PROP_DIM);
         // Clear out wurstchain in SRAM immediately; if you turn it off you're
         // back to 0.
-        sram_update_wurstchain(0);
+        sram_set_wurstchain(0);
       }
     } else if (mtype == MOB_TYPE_BOMB) {
       percent = 100;
@@ -1081,15 +1083,17 @@ u8 dropspot(u8 pos) {
 void sram_init(void) {
   ENABLE_RAM;
   // Check SRAM.
-  if (!(_SRAM[SRAM_SAVE_DATA + 0] == 'p' &&
-        _SRAM[SRAM_SAVE_DATA + 1] == 'o' &&
-        _SRAM[SRAM_SAVE_DATA + 2] == 'r' &&
-        _SRAM[SRAM_SAVE_DATA + 3] == 'k' &&
-        _SRAM[SRAM_SAVE_DATA + 4] == 'l' &&
-        _SRAM[SRAM_SAVE_DATA + 5] == 'i' &&
-        _SRAM[SRAM_SAVE_DATA + 6] == 'k' &&
-        _SRAM[SRAM_SAVE_DATA + 7] == 'e' &&
-        _SRAM[SRAM_SAVE_DATA + 8] < MAX_WURSTCHAIN + 1)) {
+  if (_SRAM[SRAM_SAVE_DATA + 0] == 'p' &&
+      _SRAM[SRAM_SAVE_DATA + 1] == 'o' &&
+      _SRAM[SRAM_SAVE_DATA + 2] == 'r' &&
+      _SRAM[SRAM_SAVE_DATA + 3] == 'k' &&
+      _SRAM[SRAM_SAVE_DATA + 4] == 'l' &&
+      _SRAM[SRAM_SAVE_DATA + 5] == 'i' &&
+      _SRAM[SRAM_SAVE_DATA + 6] == 'k' &&
+      _SRAM[SRAM_SAVE_DATA + 7] == 'e' &&
+      _SRAM[SRAM_SAVE_DATA + 8] < MAX_WURSTCHAIN + 1) {
+    wurstchain = _SRAM[SRAM_SAVE_DATA + 8];
+  } else {
     _SRAM[SRAM_SAVE_DATA + 0] = 'p';
     _SRAM[SRAM_SAVE_DATA + 1] = 'o';
     _SRAM[SRAM_SAVE_DATA + 2] = 'r';
@@ -1099,14 +1103,18 @@ void sram_init(void) {
     _SRAM[SRAM_SAVE_DATA + 6] = 'k';
     _SRAM[SRAM_SAVE_DATA + 7] = 'e';
     _SRAM[SRAM_SAVE_DATA + 8] = 0;
-  } else {
-    wurstchain = _SRAM[SRAM_SAVE_DATA + 8];
   }
   DISABLE_RAM;
 }
 
-void sram_update_wurstchain(u8 value) {
+void sram_get_wurstchain(void) {
   ENABLE_RAM;
-  _SRAM[SRAM_SAVE_DATA + 8] = value;
+  wurstchain = _SRAM[SRAM_SAVE_DATA + 8];
+  DISABLE_RAM;
+}
+
+void sram_set_wurstchain(u8 value) {
+  ENABLE_RAM;
+  _SRAM[SRAM_SAVE_DATA + 8] = (value < MAX_WURSTCHAIN) ? value : MAX_WURSTCHAIN;
   DISABLE_RAM;
 }

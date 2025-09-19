@@ -26,7 +26,8 @@ void trigger_spr(SprType, u8 trigger_val);
 u8 dropspot(u8 pos);
 
 void sram_init(void);
-void sram_update_wurstchain(u8 value);
+void sram_get_wurstchain(void);
+void sram_set_wurstchain(u8 value);
 
 extern Turn turn;
 

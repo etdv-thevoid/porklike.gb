@@ -197,9 +197,11 @@ void restart_menu_update(void) {
       if (restart_menu_select) {
         restart_menu_up = 0;
         restart_menu_select = 0;
+
         // restart game
         doloadfloor = 1;
         pal_fadeout();
+        //sram_set_wurstchain(wurstchain);
         music_main();
         gameplay_init();
       } else {

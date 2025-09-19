@@ -71,14 +71,14 @@ void gameover_update(void) {
       set_bkg_tiles(WIN_X_OFFSET, WIN_Y_OFFSET, WIN_WIDTH, WIN_HEIGHT, win_map);
       if (wurstchain < MAX_WURSTCHAIN) {
         wurstchain += 1;
-        sram_update_wurstchain(wurstchain);
+      sram_set_wurstchain(wurstchain);
       }
     } else {
       music_dead();
       set_bkg_tiles(DEAD_X_OFFSET, DEAD_Y_OFFSET, DEAD_WIDTH, DEAD_HEIGHT,
                     dead_map);
       wurstchain = 0;
-      sram_update_wurstchain(wurstchain);
+      sram_set_wurstchain(wurstchain);
     }
     set_bkg_tiles(STATS_X_OFFSET, STATS_Y_OFFSET, STATS_WIDTH, STATS_HEIGHT,
                   stats_map);
@@ -109,10 +109,10 @@ void gameover_update(void) {
     if (newjoy & J_A) {
       sfx(SFX_OK);
       gameover_state = GAME_OVER_NONE;
+
+      // restart game
       doloadfloor = 1;
       pal_fadeout();
-
-      // reset initial state
       music_main();
       gameplay_init();
     } else {
