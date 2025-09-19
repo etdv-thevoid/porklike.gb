@@ -47,8 +47,10 @@ void animate_end(void) {
   u16 last_addr = 0;
   u8 last_val = 0;
 
+#ifdef CGB_SUPPORT
   // Keep track of updated saws (they need a different palette)
   dirty_saw_ptr = dirty_saw;
+#endif
 
   dirty_code[0] = 0xc9;     // ret (changed to push af below)
   dirty_code[1] = 0xaf;     // xor a
@@ -64,9 +66,11 @@ void animate_end(void) {
       tile = 0;
     } else {
       tile = tmap[pos];
+#ifdef CGB_SUPPORT
       if ((tile & TILE_SAW_MASK) == TILE_SAW || tile == TILE_SAW_BROKEN) {
         *dirty_saw_ptr++ = pos;
       }
+#endif
 
       if ((index = mobmap[pos])) {
         --index;
