@@ -78,6 +78,7 @@ void gameover_update(void) {
       set_bkg_tiles(DEAD_X_OFFSET, DEAD_Y_OFFSET, DEAD_WIDTH, DEAD_HEIGHT,
                     dead_map);
       wurstchain = 0;
+      sram_update_wurstchain(wurstchain);
     }
     set_bkg_tiles(STATS_X_OFFSET, STATS_Y_OFFSET, STATS_WIDTH, STATS_HEIGHT,
                   stats_map);

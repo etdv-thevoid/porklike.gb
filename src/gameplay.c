@@ -1089,7 +1089,7 @@ void sram_init(void) {
         _SRAM[SRAM_SAVE_DATA + 5] == 'i' &&
         _SRAM[SRAM_SAVE_DATA + 6] == 'k' &&
         _SRAM[SRAM_SAVE_DATA + 7] == 'e' &&
-        _SRAM[SRAM_SAVE_DATA + 8] < MAX_WURSTCHAIN)) {
+        _SRAM[SRAM_SAVE_DATA + 8] <= MAX_WURSTCHAIN)) {
     _SRAM[SRAM_SAVE_DATA + 0] = 'p';
     _SRAM[SRAM_SAVE_DATA + 1] = 'o';
     _SRAM[SRAM_SAVE_DATA + 2] = 'r';
